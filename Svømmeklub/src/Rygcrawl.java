@@ -1,0 +1,9 @@
+public class Rygcrawl extends Disciplin {
+    public Rygcrawl(int medlemsID, String dato, double træningstid, String stævne, int placering, double stævnetid){
+        super(medlemsID, dato, træningstid, stævne, placering, stævnetid);
+    }
+
+    public Rygcrawl(int medlemsID, String dato, double træningstid) {
+        super(medlemsID, dato, træningstid);
+    }
+}
