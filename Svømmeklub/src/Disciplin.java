@@ -1,4 +1,5 @@
 public class Disciplin {
+    private String navn;
     protected int medlemsID;
     protected String dato;
     protected double træningstid;
@@ -6,8 +7,9 @@ public class Disciplin {
     protected int placering;
     protected double stævnetid;
 
-    public Disciplin(int medlemsID, String dato, double træningstid, String stævne, int placering, double stævnetid){
+    public Disciplin(int medlemsID, String navn, String dato, double træningstid, String stævne, int placering, double stævnetid){
         this.medlemsID = medlemsID;
+        this.navn = navn;
         this.dato = dato;
         this.træningstid = træningstid;
         this.stævne = stævne;
@@ -15,8 +17,9 @@ public class Disciplin {
         this.stævnetid = stævnetid;
     }
 
-    public Disciplin(int medlemsID, String dato, double træningstid) {
+    public Disciplin(int medlemsID, String navn, String dato, double træningstid) {
         this.medlemsID = medlemsID;
+        this.navn = navn;
         this.dato = dato;
         this.træningstid = træningstid;
     }

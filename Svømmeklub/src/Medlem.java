@@ -30,60 +30,103 @@ public class Medlem{
         this.postnummer = postnummer;
             }
 
+
     //getters and setters
-    public int getMedlemsID(){
+
+    public int getMedlemsID() {
         return medlemsID;
     }
 
     public void setMedlemsID(int medlemsID) {
         this.medlemsID = medlemsID;
-            }
+    }
 
-    public String getFornavn(){
+    public String getFornavn() {
         return fornavn;
     }
 
-    public void setForavn(String navn){
+    public void setFornavn(String fornavn) {
         this.fornavn = fornavn;
     }
-    public String getEfternavn(){
+
+    public String getEfternavn() {
         return efternavn;
     }
 
-    public void setEfternavn(String navn){
+    public void setEfternavn(String efternavn) {
         this.efternavn = efternavn;
     }
 
-    public int getAlder(){
+    public int getAlder() {
         return alder;
     }
 
-    public void setAlder(int alder){
+    public void setAlder(int alder) {
         this.alder = alder;
     }
 
-    public String getKøn(){
+    public String getKøn() {
         return køn;
     }
 
-    public void setKøn(String køn){
+    public void setKøn(String køn) {
         this.køn = køn;
     }
 
-    public String getAdresse(){
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(String adresse){
+    public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
 
-    public String getMedlemstype(){
+    public String getMedlemstype() {
         return medlemstype;
     }
 
-    public void setMedlemstype(String medlemstype1){
-        this.medlemstype = medlemstype1;
+    public void setMedlemstype(String medlemstype) {
+        this.medlemstype = medlemstype;
+    }
+
+    public int getHusnr() {
+        return husnr;
+    }
+
+    public void setHusnr(int husnr) {
+        this.husnr = husnr;
+    }
+
+    public int getPostnummer() {
+        return postnummer;
+    }
+
+    public void setPostnummer(int postnummer) {
+        this.postnummer = postnummer;
+    }
+
+    @Override
+    public String toString() {
+        return "Medlem{" +
+                "medlemsID=" + medlemsID +
+                ", fornavn='" + fornavn + '\'' +
+                ", efternavn='" + efternavn + '\'' +
+                ", alder=" + alder +
+                ", køn='" + køn + '\'' +
+                ", email='" + email + '\'' +
+                ", adresse='" + adresse + '\'' +
+                ", medlemstype='" + medlemstype + '\'' +
+                ", husnr=" + husnr +
+                ", postnummer=" + postnummer +
+                '}';
     }
 
     public static int CountLine(String filename)throws Exception{

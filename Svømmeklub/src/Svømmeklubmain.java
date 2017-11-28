@@ -7,9 +7,13 @@ public class Svømmeklubmain
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
         ArrayList<Medlem> medlemArray = new ArrayList<Medlem>();
-        ArrayList<Konkurrencesvømmer> konkurrenceArray = new ArrayList<Konkurrencesvømmer>();
+        ArrayList<Konkurrencesvømmer> crawlArray = new ArrayList<Konkurrencesvømmer>();
+        Double[] crawltidArray ={0.0,0.0,0.0,0.0};
         Medlem.hentMedlem("medlemlist.txt", medlemArray);
-        OpretMedlem(medlemArray, input);
+        Konkurrencesvømmer.hentCrawl("crawl.txt", crawlArray, crawltidArray);
+        System.out.println(Arrays.toString(crawltidArray));
+        OpretCrawl(crawlArray,crawltidArray, input);
+        Konkurrencesvømmer.GemCrawl("crawl.txt", crawlArray, crawltidArray);
         Medlem.GemMedlem("medlemlist.txt", medlemArray);
 
     }
@@ -45,7 +49,12 @@ public class Svømmeklubmain
             return medlem;
         }
 
-    /*public static Konkurrencesvømmer OpretKonkurrence(ArrayList<Medlem> KonkurrenceArray, Scanner input)throws Exception{
+    /*public static Disciplin OpretCrawl(ArrayList<Disciplin> crawlArray, Scanner input)throws Exception{
+        Disciplin Crawl = new Disciplin(Medlem.getMedlemsID(),"Crawl", "0",0 );
+        crawlArray.add(Crawl);
+        return Crawl;
+   }*/
+    public static Konkurrencesvømmer OpretCrawl(ArrayList<Konkurrencesvømmer> crawlArray, Double[] crawltidArray, Scanner input)throws Exception{
         int medlemsID = CountLine("medlemList.txt")+1;
         System.out.println("\nmedlem:\n");
         System.out.println("Skriv fornavn på medlem:");
@@ -70,13 +79,13 @@ public class Svømmeklubmain
         IntPrint(input);
         int postnummer = input.nextInt();
 
-        Konkurrencesvømmer konkurrence = new Medlem(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, disciplin);
-        KonkurrenceArray.add(konkurrence);
+        Konkurrencesvømmer Crawl = new Konkurrencesvømmer(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, "Crawl",crawltidArray);
+        crawlArray.add(Crawl);
 
         System.out.println("Your information is as follows:\n");
-        System.out.println(konkurrenceArray + "\n");
-        return konkurrence;
-    }*/
+        System.out.println(crawlArray + "\n");
+        return Crawl;
+    }
 
     public static int CountLine(String filename)throws Exception{
         Scanner file = new Scanner(new File(filename));
