@@ -16,8 +16,9 @@ public class Medlem{
     protected String medlemstype;
     protected int husnr;
     protected int postnummer;
+    protected int kontingent;
 
-    public Medlem(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer){
+    public Medlem(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, int kontingent){
         this.medlemsID = medlemsID;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
@@ -28,6 +29,7 @@ public class Medlem{
         this.medlemstype = medlemstype;
         this.husnr = husnr;
         this.postnummer = postnummer;
+        this.kontingent = kontingent;
             }
 
 
@@ -141,7 +143,7 @@ public class Medlem{
 
     public void GemFil(String file) throws Exception  {
         PrintStream outputToFile = new PrintStream(new FileOutputStream(file, true));
-        String svømmer = String.format("%d %s %s %d %s %s %s %s %d %d", medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer);
+        String svømmer = String.format("%d %s %s %d %s %s %s %s %d %d %d", medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent);
         outputToFile.println(svømmer);
         outputToFile.flush();
     }
@@ -157,7 +159,7 @@ public class Medlem{
     public static void hentMedlem(String file, ArrayList<Medlem> medlemArray) throws Exception {
         Scanner scanner = new Scanner(new File(file));
         while (scanner.hasNextLine()) {
-                medlemArray.add(new Medlem(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt()));
+                medlemArray.add(new Medlem(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt()));
                 scanner.nextLine();
         }
         scanner.close();

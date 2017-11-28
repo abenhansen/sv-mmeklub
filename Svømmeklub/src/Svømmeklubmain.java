@@ -27,6 +27,7 @@ public class Svømmeklubmain
             System.out.println("Intast alder: ");
             IntPrint(input);
             int alder = input.nextInt();
+            int kontingent = 0;
             System.out.println("Intast dit køn: ");
              String køn = input.next();
             System.out.println("Intast email: ");
@@ -41,7 +42,7 @@ public class Svømmeklubmain
             System.out.println("Intast postnummer: ");
             IntPrint(input);
             int postnummer = input.nextInt();
-            Medlem medlem = new Medlem(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer);
+            Medlem medlem = new Medlem(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent);
             medlemArray.add(medlem);
 
                 System.out.println("Your information is as follows:\n");
@@ -64,6 +65,7 @@ public class Svømmeklubmain
         System.out.println("Intast alder: ");
         IntPrint(input);
         int alder = input.nextInt();
+        int kontingent =0;
         System.out.println("Intast dit køn: ");
         String køn = input.next();
         System.out.println("Intast email: ");
@@ -79,7 +81,7 @@ public class Svømmeklubmain
         IntPrint(input);
         int postnummer = input.nextInt();
 
-        Konkurrencesvømmer Crawl = new Konkurrencesvømmer(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, "Crawl",crawltidArray);
+        Konkurrencesvømmer Crawl = new Konkurrencesvømmer(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, "Crawl",crawltidArray, kontingent);
         crawlArray.add(Crawl);
 
         System.out.println("Your information is as follows:\n");

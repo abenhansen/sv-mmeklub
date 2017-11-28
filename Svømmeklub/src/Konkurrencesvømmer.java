@@ -7,8 +7,8 @@ public class Konkurrencesvømmer extends Medlem {
 
 
 
-    public Konkurrencesvømmer(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, String disciplin,Double[] crawltidArray){
-        super(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer);
+    public Konkurrencesvømmer(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, String disciplin,Double[] crawltidArray, int kontingent){
+        super(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent);
         this.disciplin = disciplin;
     }
     //Getters and setters
@@ -24,7 +24,7 @@ public class Konkurrencesvømmer extends Medlem {
     public void GemCrawlFil(String file, Double[] crawltidArray) throws Exception  {
         PrintStream outputToFile = new PrintStream(new FileOutputStream(file, true));
         String pæn = String.format(Arrays.toString(crawltidArray).replaceAll("[\\,\\[\\]]",""));
-        String svømmer = String.format("%s %d %s %s %d %s %s %s %s %d %d %s", pæn, medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, disciplin);
+        String svømmer = String.format("%s %d %s %s %d %s %s %s %s %d %d %s %d", pæn, medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, disciplin, kontingent);
         outputToFile.println(svømmer);
         outputToFile.flush();
     }
@@ -45,7 +45,7 @@ public class Konkurrencesvømmer extends Medlem {
             for (int i = 0; i < crawltidArray.length; i++) {
                 crawltidArray[i] = scanner.nextDouble();
             }
-            crawlArray.add(new Konkurrencesvømmer(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt(),scanner.next(), crawltidArray));
+            crawlArray.add(new Konkurrencesvømmer(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt(),scanner.next(), crawltidArray, scanner.nextInt()));
             scanner.nextLine();
         }
         scanner.close();
