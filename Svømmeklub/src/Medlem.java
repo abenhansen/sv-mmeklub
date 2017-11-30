@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Medlem{
+public class Medlem {
 
     protected int medlemsID;
     protected String fornavn;
@@ -17,8 +17,9 @@ public class Medlem{
     protected int husnr;
     protected int postnummer;
     protected int kontingent;
+    protected String betaling;
 
-    public Medlem(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, int kontingent){
+    public Medlem(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, int kontingent, String betaling){
         this.medlemsID = medlemsID;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
@@ -30,6 +31,7 @@ public class Medlem{
         this.husnr = husnr;
         this.postnummer = postnummer;
         this.kontingent = kontingent;
+        this.betaling = betaling;
             }
 
 
@@ -143,7 +145,7 @@ public class Medlem{
 
     public void GemFil(String file) throws Exception  {
         PrintStream outputToFile = new PrintStream(new FileOutputStream(file, true));
-        String svømmer = String.format("%d %s %s %d %s %s %s %s %d %d %d", medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent);
+        String svømmer = String.format("%d %s %s %d %s %s %s %s %d %d %d %s", medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent, betaling);
         outputToFile.println(svømmer);
         outputToFile.flush();
     }
@@ -159,7 +161,7 @@ public class Medlem{
     public static void hentMedlem(String file, ArrayList<Medlem> medlemArray) throws Exception {
         Scanner scanner = new Scanner(new File(file));
         while (scanner.hasNextLine()) {
-                medlemArray.add(new Medlem(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt()));
+                medlemArray.add(new Medlem(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.next()));
                 scanner.nextLine();
         }
         scanner.close();
