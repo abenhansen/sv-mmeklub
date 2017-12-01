@@ -7,8 +7,8 @@ public class Konkurrencesvømmer extends Medlem implements Comparable<Konkurrenc
     private double tid;
     private String hold;
 
-    public Konkurrencesvømmer(double tid,int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, String disciplin, int kontingent, String betaling,  String hold){
-        super(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent, betaling);
+    public Konkurrencesvømmer(double tid,int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, String disciplin, int kontingent, String betalt,  String hold){
+        super(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent, betalt);
         this.disciplin = disciplin;
         this.tid = tid;
         this.hold = hold;
@@ -30,7 +30,7 @@ public class Konkurrencesvømmer extends Medlem implements Comparable<Konkurrenc
     public void GemCrawlFil(String file) throws Exception  {
         PrintStream outputToFile = new PrintStream(new FileOutputStream(file, true));
         //String pæn = String.format(Arrays.toString(crawltidArray).replaceAll("[\\,\\[\\]]",""));
-        String svømmer = String.format("%f %d %s %s %d %s %s %s %s %d %d %s %d %s %s", tid, medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, disciplin, kontingent, betaling, hold);
+        String svømmer = String.format("%f %d %s %s %d %s %s %s %s %d %d %s %d %s %s", tid, medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, disciplin, kontingent, betalt, hold);
         outputToFile.println(svømmer);
         outputToFile.flush();
     }
@@ -83,7 +83,7 @@ public class Konkurrencesvømmer extends Medlem implements Comparable<Konkurrenc
                 ", husnr=" + husnr +
                 ", postnummer=" + postnummer +
                 ", kontingent=" + kontingent +
-                ", betaling=" + betaling +
+                ", betalt=" + betalt +
                 '}';
     }
 }

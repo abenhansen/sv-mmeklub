@@ -2,19 +2,20 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class Svømmeklubmain
-{
-    public static void main(String[] args) throws Exception {
-        Scanner input = new Scanner(System.in);
-        ArrayList<Medlem> medlemArray = new ArrayList<Medlem>();
-        ArrayList<Konkurrencesvømmer> crawlArray = new ArrayList<Konkurrencesvømmer>();
-        //Double[] crawltidArray ={10.0,5.6,0.8,0.0};
-        Medlem.hentMedlem("medlemlist.txt", medlemArray);
-        Konkurrencesvømmer.hentCrawl("crawl.txt", crawlArray);
-        System.out.println(crawlArray);
-        //FjernMedlem(crawlArray);
+    public class Svømmeklubmain
+    {
+        public static void main(String[] args) throws Exception {
+            Scanner input = new Scanner(System.in);
+            ArrayList<Medlem> medlemArray = new ArrayList<Medlem>();
+            ArrayList<Konkurrencesvømmer> crawlArray = new ArrayList<Konkurrencesvømmer>();
+            //Double[] crawltidArray ={10.0,5.6,0.8,0.0};
+            Medlem.hentMedlem("medlemlist.txt", medlemArray);
+            Konkurrencesvømmer.hentCrawl("crawl.txt", crawlArray);
+            System.out.println(crawlArray);
+            fixArrays(crawlArray);
+            FjernMedlem(crawlArray);
         //OpretMedlem(medlemArray, input);
-        OpretCrawl(crawlArray, input);
+        //OpretCrawl(crawlArray, input);
         Konkurrencesvømmer.GemCrawl("crawl.txt", crawlArray);
         Medlem.GemMedlem("medlemlist.txt", medlemArray);
 
@@ -25,44 +26,83 @@ public class Svømmeklubmain
         System.out.println(crawlArray);
     }
 
+        public static void ændreBetaling(ArrayList<Medlem> medlemArray, Scanner input){
+            System.out.println("Tast 1 for at registrere medlemmets betaling af kontingent.");
+            System.out.println("Tast 2 for at redigere medlemmets betaling til ikke betalt.");
 
-    /*public static void FjernMedlem (ArrayList<Konkurrencesvømmer> crawlArray) throws Exception   {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Indsæt ID for medlem der skal fjernes:");
-        int count = 0;
+            switch(input.nextInt()) {
+                case 1:
+                    System.out.println("Indtast ID på medlem du vil ændre");
+                    medlemArray.get(input.nextInt()-1).registrerBetaling();
+                    break;
 
-        do {
-            IntPrint(input);
-            int userInput = input.nextInt()-1;
-            if (crawlArray.size()>userInput && userInput>= 0) {
-                    System.out.println(crawlArray.get(userInput));
-                    System.out.println("Slet medlem? (J for ja - N for nej)");
-                 if (input.next().equalsIgnoreCase("J")) {
-                        System.out.println("Sletter medlem \n"+crawlArray.get(userInput));
-                        crawlArray.remove(userInput);
-                        count++;
-                    }
-                    if (input.next().equalsIgnoreCase("N"))   {
-                        System.out.println("Fjern et andet medlem?");
-                       if (input.nextLine().equalsIgnoreCase("J"))   {
-                            System.out.println("Indsæt ID for medlem der skal fjernes:");
-                        }
-                        if (input.next().equalsIgnoreCase("N")) {
-                            System.out.println("Afslutter \"fjern medlem\"");
-                            count++;
-                        }
-                    }
-
-            } else    {
-                System.out.println("ID findes ikke i systemet. Tjek ID og indtast igen.");
+                case 2:
+                    medlemArray.get(input.nextInt()-1).ikkeBetalt();
+                    break;
             }
+        }
+
+        public static void tjekBetaling(ArrayList<Medlem> medlemArray){
+            ArrayList<Medlem> restanceListe = new ArrayList<Medlem>();
+            for (Medlem medlem: medlemArray) {
+                if(medlem.getBetaling().equals("nej")){
+                    restanceListe.add(medlem);
+                }
+            }
+            for (Medlem medlem: restanceListe) {
+                System.out.println(medlem.getFornavn()+" "+medlem.getEfternavn());
+            }
+        }
 
 
-        }while (count == 0);
+        public static void FjernMedlem (ArrayList<Konkurrencesvømmer> crawlArray) throws Exception   {
+            Scanner input = new Scanner(System.in);
+            Scanner input2 = new Scanner(System.in);
+            System.out.println("Indsæt ID for medlem der skal fjernes:");
+            int count4 = 0;
+            int count3 = 0;
+            int count2 = 0;
+            int count  = 0;
+            do {
+
+                IntPrint(input);
+                int userInput = input.nextInt()-1;
+                System.out.println(crawlArray.get(userInput));
 
 
-    }
-    */
+                do {
+                    System.out.println("Slet medlem? (J for ja - N for nej)");
+                    String JN = input.next();
+                    do {
+                        switch (JN) {
+                            case "J":
+                                System.out.println("Sletter medlem \n" + crawlArray.get(userInput));
+                                crawlArray.remove(userInput);
+                                count++;
+                                count2++;
+                                count3++;
+                                break;
+                            case "N":
+                                count4++;
+                                count3++;
+                                count2++;
+                                count++;
+                                break;
+                            default:
+                                System.out.println("Fejl. Indtast J for ja, N for nej");
+                                count3++;
+                                break;
+                        }
+                    }while (count3==0);
+
+                }   while (count2==0);
+            }   while (count==0);
+            System.out.println("Afslutter \"Fjern Medlem\"");
+            Thread.sleep(1000);
+
+
+
+        }
 
         public static Medlem OpretMedlem(ArrayList<Medlem> medlemArray, Scanner input)throws Exception{
             int medlemsID = CountLine("medlemList.txt")+1;
@@ -89,13 +129,14 @@ public class Svømmeklubmain
                 }
                 else if(medlemstype.equals("passiv") || (medlemstype.equals("Passiv"))){
                     kontingent = 500;
+                    break;
                 }
                 else{
                     System.out.println("Indtast aktiv eller passiv.");
                 }
             }
             while(fejl);
-            String betaling = "";
+            String betalt = "nej";
             System.out.println("Skriv adresse navn på medlemet : ");
             String adresse = input.next();
             System.out.println("Skriv hus nummer til adressen : ");
@@ -104,7 +145,7 @@ public class Svømmeklubmain
             System.out.println("Intast postnummer: ");
             IntPrint(input);
             int postnummer = input.nextInt();
-            Medlem medlem = new Medlem(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent, betaling);
+            Medlem medlem = new Medlem(medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent, betalt);
             medlemArray.add(medlem);
 
                 System.out.println("Your information is as follows:\n");
@@ -120,7 +161,7 @@ public class Svømmeklubmain
     public static Konkurrencesvømmer OpretCrawl(ArrayList<Konkurrencesvømmer> crawlArray, Scanner input)throws Exception{
         int kontingent =0;
         String hold ="";
-        String betaling="0";
+        String betaling="nej";
         int medlemsID = CountLine("medlemList.txt")+1;
         System.out.println("\nmedlem:\n");
         System.out.println("Skriv fornavn på medlem:");
@@ -167,6 +208,7 @@ public class Svømmeklubmain
             }
             else{
                 System.out.println("Indtast aktiv eller passiv.");
+                break;
             }
         }
         while(fejl);
@@ -179,6 +221,7 @@ public class Svømmeklubmain
         System.out.println(crawlArray + "\n");
         return Crawl;
     }
+
 
 
 

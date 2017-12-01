@@ -17,9 +17,9 @@ public class Medlem {
     protected int husnr;
     protected int postnummer;
     protected int kontingent;
-    protected String betaling;
+    protected String betalt;
 
-    public Medlem(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, int kontingent, String betaling){
+    public Medlem(int medlemsID, String fornavn, String efternavn, int alder, String køn, String email, String medlemstype, String adresse, int husnr, int postnummer, int kontingent, String betalt){
         this.medlemsID = medlemsID;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
@@ -31,8 +31,8 @@ public class Medlem {
         this.husnr = husnr;
         this.postnummer = postnummer;
         this.kontingent = kontingent;
-        this.betaling = betaling;
-            }
+        this.betalt = betalt;
+    }
 
 
     //getters and setters
@@ -117,6 +117,18 @@ public class Medlem {
         this.postnummer = postnummer;
     }
 
+    public String getBetaling(){
+        return betalt;
+    }
+
+    public void registrerBetaling(){
+        this.betalt = "ja";
+    }
+
+    public void ikkeBetalt(){
+        this.betalt = "nej";
+    }
+
     @Override
     public String toString() {
         return "Medlem{" +
@@ -145,7 +157,7 @@ public class Medlem {
 
     public void GemFil(String file) throws Exception  {
         PrintStream outputToFile = new PrintStream(new FileOutputStream(file, true));
-        String svømmer = String.format("%d %s %s %d %s %s %s %s %d %d %d %s", medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent, betaling);
+        String svømmer = String.format("%d %s %s %d %s %s %s %s %d %d %d %s", medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, kontingent, betalt);
         outputToFile.println(svømmer);
         outputToFile.flush();
     }
@@ -161,9 +173,9 @@ public class Medlem {
     public static void hentMedlem(String file, ArrayList<Medlem> medlemArray) throws Exception {
         Scanner scanner = new Scanner(new File(file));
         while (scanner.hasNextLine()) {
-                medlemArray.add(new Medlem(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.next()));
-                scanner.nextLine();
+            medlemArray.add(new Medlem(scanner.nextInt(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.next(), scanner.next(), scanner.next(), scanner.next(), scanner.nextInt(), scanner.nextInt(), scanner.nextInt(), scanner.next()));
+            scanner.nextLine();
         }
         scanner.close();
     }
-            }
+}

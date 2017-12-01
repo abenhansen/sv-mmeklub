@@ -1,4 +1,2 @@
-1,000000 1 ken k 1 1 1 aktiv 1 1 1 Crawl 1000 0 junior
-1,000000 3 keo k 1 1 1 aktiv 1 1 1 Crawl 1000 0 junior
-1,000000 4 kenny k 1 1 1 aktiv 1 1 1 Crawl 1000 0 junior
-1,000000 5 klaus k 1 1 1 aktiv 1 1 1 Crawl 1000 0 junior
+1,000000 2 1 1 1 1 1 passiv 1 1 1 Crawl 1000 nej junior
+1,000000 2 1 1 1 1 1 aktiv 1 1 1 Crawl 1000 nej junior
