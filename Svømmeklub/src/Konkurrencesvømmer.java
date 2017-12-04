@@ -66,6 +66,8 @@ public class Konkurrencesvømmer extends Medlem implements Comparable<Konkurrenc
         return new Double(tid).compareTo(o.tid);
     }
 
+
+
     @Override
     public String toString() {
         return "Konkurrencesvømmer{" +

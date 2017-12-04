@@ -1,2 +1,3 @@
-1,000000 2 1 1 1 1 1 passiv 1 1 1 Crawl 1000 nej junior
-1,000000 2 1 1 1 1 1 aktiv 1 1 1 Crawl 1000 nej junior
+99,990000 2 2 2 2 2 2 aktiv 2 2 2 Crawl 1000 nej junior
+99,990000 3 VIncent Sucks 1 1 1 aktiv 1 1 1 Crawl 1000 nej junior
+99,990000 4 1 1 1 1 1 aktiv 1 1 1 Crawl 1000 nej junior

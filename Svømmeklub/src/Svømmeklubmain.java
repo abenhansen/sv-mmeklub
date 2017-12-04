@@ -1,6 +1,7 @@
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.*;
+import java.*;
 
     public class Svømmeklubmain
     {
@@ -11,19 +12,25 @@ import java.util.*;
             //Double[] crawltidArray ={10.0,5.6,0.8,0.0};
             Medlem.hentMedlem("medlemlist.txt", medlemArray);
             Konkurrencesvømmer.hentCrawl("crawl.txt", crawlArray);
+            //registrereTid(crawlArray);
+           // fixArrays(crawlArray);
             System.out.println(crawlArray);
-            fixArrays(crawlArray);
-            FjernMedlem(crawlArray);
+            //FjernMedlem(crawlArray);
         //OpretMedlem(medlemArray, input);
-        //OpretCrawl(crawlArray, input);
+        OpretCrawl(crawlArray, input);
         Konkurrencesvømmer.GemCrawl("crawl.txt", crawlArray);
         Medlem.GemMedlem("medlemlist.txt", medlemArray);
 
     }
 
     public static void fixArrays (ArrayList<Konkurrencesvømmer>crawlArray) {
-        Collections.sort(crawlArray);
-        System.out.println(crawlArray);
+        ArrayList<Konkurrencesvømmer> temp = (ArrayList<Konkurrencesvømmer>)crawlArray.clone();
+        Collections.sort(temp);
+        System.out.println("Top 5 bedste svømmere inde for crawl");
+        for(int i = 0; i<5; i++)
+        System.out.println("ID = "+temp.get(i).getMedlemsID()+" Navn = "+temp.get(i).getFornavn()+
+                " "+ temp.get(i).getEfternavn()+ ", Diciplin = " + temp.get(i).getDisciplin()+", Tid = "+
+                temp.get(i).getTid());
     }
 
         public static void ændreBetaling(ArrayList<Medlem> medlemArray, Scanner input){
@@ -64,9 +71,14 @@ import java.util.*;
             int count2 = 0;
             int count  = 0;
             do {
-
-                IntPrint(input);
-                int userInput = input.nextInt()-1;
+            int userInput =0;
+                do {
+                    IntPrint(input);
+                    userInput = input.nextInt()-1;
+                    if (userInput >crawlArray.size())   {
+                        System.out.println("Fejl. Indsæt ID for medlem:");
+                    }
+                }while (userInput >crawlArray.size());
                 System.out.println(crawlArray.get(userInput));
 
 
@@ -105,7 +117,14 @@ import java.util.*;
         }
 
         public static Medlem OpretMedlem(ArrayList<Medlem> medlemArray, Scanner input)throws Exception{
-            int medlemsID = CountLine("medlemList.txt")+1;
+            int medlemsID;
+            if(medlemArray.size()==0){
+                medlemsID = 0;
+            }
+            else {
+                medlemsID = medlemArray.get(medlemArray.size() - 1).getMedlemsID();
+            }
+            medlemsID++;
             System.out.println("\nmedlem:\n");
             System.out.println("Skriv fornavn på medlem:");
             String fornavn = input.next();
@@ -125,17 +144,17 @@ import java.util.*;
             do{
                 medlemstype = input.next();
                 if(medlemstype.equals("aktiv") || (medlemstype.equals("Aktiv"))){
-                    break;
+                    fejl = false;
                 }
                 else if(medlemstype.equals("passiv") || (medlemstype.equals("Passiv"))){
                     kontingent = 500;
-                    break;
+                    fejl = false;
                 }
                 else{
                     System.out.println("Indtast aktiv eller passiv.");
                 }
             }
-            while(fejl);
+            while(fejl==true);
             String betalt = "nej";
             System.out.println("Skriv adresse navn på medlemet : ");
             String adresse = input.next();
@@ -162,7 +181,14 @@ import java.util.*;
         int kontingent =0;
         String hold ="";
         String betaling="nej";
-        int medlemsID = CountLine("medlemList.txt")+1;
+        int medlemsID;
+        if(crawlArray.size()==0){
+            medlemsID = 0;
+        }
+        else {
+            medlemsID = crawlArray.get(crawlArray.size() - 1).getMedlemsID();
+        }
+        medlemsID++;
         System.out.println("\nmedlem:\n");
         System.out.println("Skriv fornavn på medlem:");
         String fornavn = input.next();
@@ -204,17 +230,18 @@ import java.util.*;
         do{
             medlemstype = input.next();
             if(medlemstype.equals("aktiv") || (medlemstype.equals("Aktiv"))){
-                break;
+                fejl = false;
+            }
+            else if(medlemstype.equals("passiv") || (medlemstype.equals("Passiv"))){
+                kontingent = 500;
+                fejl = false;
             }
             else{
                 System.out.println("Indtast aktiv eller passiv.");
-                break;
             }
         }
-        while(fejl);
-        System.out.println("Indtast svømmers bedste tid");
-        DoublePrint(input);
-        double tid = input.nextDouble();
+        while(fejl==true);
+        double tid = 99.99;
         Konkurrencesvømmer Crawl = new Konkurrencesvømmer(tid, medlemsID, fornavn, efternavn, alder, køn, email, medlemstype, adresse, husnr, postnummer, "Crawl", kontingent, betaling, hold);
         crawlArray.add(Crawl);
         System.out.println("Your information is as follows:\n");
@@ -225,15 +252,27 @@ import java.util.*;
 
 
 
-    public static int CountLine(String filename)throws Exception{
-        Scanner file = new Scanner(new File(filename));
-        int count = 0;
-        while (file.hasNextLine()) {
-            file.nextLine();
-            count++;
+        public static void registrereTid (ArrayList<Konkurrencesvømmer>crawlArray)  {
+            Scanner input = new Scanner(System.in);
+            int ID;
+            System.out.println("Indsæt ID for det medlem som tiden skal registreres til:");
+
+            do {
+                IntPrint(input);
+                ID = input.nextInt()-1;
+                if (ID >crawlArray.size())   {
+                    System.out.println("Fejl. Indsæt ID for medlem:");
+                }
+            }while (ID >crawlArray.size());
+
+
+            System.out.println("ID: ["+crawlArray.get(ID).getMedlemsID()+"] Navn: "+ crawlArray.get(ID).getFornavn()+" "+crawlArray.get(ID).getEfternavn());
+            System.out.println("Indsæt tid:");
+            DoublePrint(input);
+            double tid = input.nextDouble();
+            crawlArray.get(ID).setTid(tid);
+            System.out.println("Du satte tiden til: "+tid);
         }
-        return count;
-    }
 
     public static String IntPrint(Scanner input){
         String number =null;
@@ -253,5 +292,77 @@ import java.util.*;
         }
         return number;
     }
+        public static void MenuMedlemRediger(ArrayList<Medlem> medlemArray){
+            Scanner console = new Scanner (System.in);
+            System.out.println("Skriv ID");
+             int IDinput =0;
+            do {
+                IntPrint(console);
+                IDinput = console.nextInt()-1;
+                if (IDinput >medlemArray.size())   {
+                    System.out.println("Fejl. Indsæt ID for medlem:");
+                }
+            }while (IDinput >medlemArray.size());
+            System.out.println(medlemArray.get(IDinput));
+            medlemArray.get(IDinput);
+            System.out.println("Hvad vil du ændre?\n\nTryk 1 for fornavn.\nTryk 2 for efternavn.\nTryk 3 for alder.\nTryk 4 for køn.\nTryk 5 for email.\nTryk 6 for vejnavn.\nTryk 7 for husnummer.\nTryk 8 for postnummer.\nTryk 9 for medlemstype.\nTryk 10 for at gå tilbage til menu.");
+            int menuitem = console.nextInt();
+            switch(menuitem){
 
+                case 1:
+                    System.out.println("Skriv nyt fornavn.");
+                    String fornavn = console.next();
+                    medlemArray.get(IDinput).setFornavn(fornavn);
+                    break;
+                case 2:
+                    System.out.println("Skriv nyt efternavn.");
+                    String efternavn = console.next();
+                    medlemArray.get(IDinput).setEfternavn(efternavn);
+                    break;
+                case 3:
+                    System.out.println("Skriv ny Alder.");
+                    int alder = console.nextInt();
+                    medlemArray.get(IDinput).setAlder(alder);
+                    break;
+                case 4:
+                    System.out.println("Skriv nyt køn.");
+                    String køn = console.next();
+                    medlemArray.get(IDinput).setKøn(køn);
+                    break;
+                case 5:
+                    System.out.println("Skriv ny email.");
+                    String email = console.next();
+                    medlemArray.get(IDinput).setEmail(email);
+                    break;
+                case 6:
+                    System.out.println("Skriv ny adresse.");
+                    String adresse = console.next();
+                    medlemArray.get(IDinput).setAdresse(adresse);
+                    break;
+                case 7:
+                    System.out.println("Skriv nyt husnummer.");
+                    IntPrint(console);
+                    int husnr = console.nextInt();
+                    medlemArray.get(IDinput).setHusnr(husnr);
+                    break;
+                case 8:
+                    System.out.println("Skriv nyt postnummer.");
+                    IntPrint(console);
+                    int postnummer = console.nextInt();
+                    medlemArray.get(IDinput).setPostnummer(postnummer);
+                    break;
+                case 9:
+                    System.out.println("Skriv ny medlemstype.");
+                    String medlemstype = console.next();
+                    medlemArray.get(IDinput).setMedlemstype(medlemstype);
+                    break;
+                case 10:
+                    break;
+                default:
+                    System.out.println("\n\nInput kan ikke læses.\n\n");
+                    break;
+
+            }
+
+        }
 }
