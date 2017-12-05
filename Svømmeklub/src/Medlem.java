@@ -101,8 +101,17 @@ public class Medlem {
         this.medlemstype = medlemstype;
     }
 
+    public int getKontingent() {
+        return kontingent;
+    }
+
+    public void setKontingent(int kontingent) {
+        this.kontingent = kontingent;
+    }
+
     public int getHusnr() {
         return husnr;
+
     }
 
     public void setHusnr(int husnr) {

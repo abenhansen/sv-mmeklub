@@ -66,7 +66,13 @@ public class Konkurrencesvømmer extends Medlem implements Comparable<Konkurrenc
         return new Double(tid).compareTo(o.tid);
     }
 
+    public String getHold() {
+        return hold;
+    }
 
+    public void setHold(String hold) {
+        this.hold = hold;
+    }
 
     @Override
     public String toString() {
