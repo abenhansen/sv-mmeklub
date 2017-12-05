@@ -76,22 +76,20 @@ public class Konkurrencesvømmer extends Medlem implements Comparable<Konkurrenc
 
     @Override
     public String toString() {
-        return "Konkurrencesvømmer{" +
-                "disciplin='" + disciplin + '\'' +
-                ", tid=" + tid +
-                ", hold='" + hold + '\'' +
-                ", medlemsID=" + medlemsID +
-                ", fornavn='" + fornavn + '\'' +
-                ", efternavn='" + efternavn + '\'' +
-                ", alder=" + alder +
-                ", køn='" + køn + '\'' +
-                ", email='" + email + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", medlemstype='" + medlemstype + '\'' +
-                ", husnr=" + husnr +
-                ", postnummer=" + postnummer +
-                ", kontingent=" + kontingent +
-                ", betalt=" + betalt +
-                '}';
+
+        return
+                "\n" +
+                " MedlemsID = " + medlemsID +
+                ", Navn = " + fornavn + " " + efternavn +
+                ", Disciplin = " + disciplin +
+                ", Tid = " + tid +
+                ", Hold = " + hold +
+                ", Alder = " + alder +
+                ", Køn = " + køn +
+                ", Email = " + email +
+                ", Adresse = " + adresse +" " + husnr +", " + postnummer +
+                ", Medlemstype = " + medlemstype +
+                ", Kontingent = " + kontingent +
+                ", Betalt = " + betalt;
     }
 }

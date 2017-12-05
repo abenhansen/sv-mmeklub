@@ -1,3 +1,5 @@
 5,000000 1 ken han 11 1 1 aktiv 1 1 1 Crawl 1000 nej junior
 99,990000 2 Ken Hansen 1 1 1 aktiv 1 1 1 RygCrawl 1000 nej junior
 99,990000 3 Vincent SucksAlot 21 1 1 aktiv 1 2121 4100 RygCrawl 1600 nej senior
+99,990000 3 Svend Erik 21 1 1 aktiv 1 1 4100 RygCrawl 1600 nej senior
+99,990000 4 Poul Poulsen 1 1 11 passiv 1 1 1 RygCrawl 500 nej junior

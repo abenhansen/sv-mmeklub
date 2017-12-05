@@ -31,13 +31,19 @@ import java.*;
             //fixArrays(hundeArray);
             // fixArrays(brystArray);
             //fixArrays(butterflyArray);
-            MenuKonkurrenceRediger(crawlArray);
+            //MenuRediger(medlemArray);
+            //MenuKonkurrenceRediger(crawlArray);
             //MenuKonkurrenceRediger(rygArray);
             //MenuKonkurrenceRediger(brystArray);
             //MenuKonkurrenceRediger(hundeArray);
             //MenuKonkurrenceRediger(butterflyArray);
-            System.out.println(crawlArray);
-            System.out.println(rygArray);
+            //PrintInfo(crawlArray);
+            //PrintInfo(rygArray);
+            //PrintInfo(hundeArray);
+            //PrintInfo(brystArray);
+            //PrintInfo(butterflyArray);
+            //PrintInfoMedlem(medlemArray);
+            //System.out.println(rygArray);
             //FjernKonkurrenceMedlem(crawlArray);
             //FjernKonkurrenceMedlem(rygArray);
             //FjernKonkurrenceMedlem(hundeArray);
@@ -490,16 +496,14 @@ import java.*;
             int IDinput = 0;
             do {
                 IntPrint(console);
-                IDinput = console.nextInt() - 1;
+                IDinput = console.nextInt()- 1;
                 if (IDinput > crawlArray.size() || IDinput < 0) {
                     System.out.println("Fejl. Indsæt ID for medlem:");
                 }
             } while (IDinput > crawlArray.size() || IDinput < 0);
             System.out.println(crawlArray.get(IDinput));
-            int count1 = 0;
             String besked = "Hvad vil du ændre?\n\n1 for fornavn.\n2 for efternavn.\n3 for alder.\n4 for køn.\n5 for email.\n6 for vejnavn.\n7 for husnummer.\n8 for postnummer.\n9 for medlemstype.\n10 for disciplin.\n11 for hold.\n0 for at gå tilbage til menu.";
             System.out.println(besked);
-
             crawlArray.get(IDinput);
             IntPrint(console);
             int menuitem;
@@ -517,9 +521,25 @@ import java.*;
                         crawlArray.get(IDinput).setEfternavn(efternavn);
                         break;
                     case 3:
+                        int kontingent = 0;
+                        String team = "";
                         System.out.println("Skriv ny Alder.");
                         IntPrint(console);
                         int alder = console.nextInt();
+                        if (alder >= 0 && alder < 18) { //alder/input
+                            kontingent = 1000;
+                            team = "junior";
+                        } else if (alder >= 18 && alder < 60) {
+                            kontingent = 1600;
+                            team = "senior";
+                        } else if (alder >= 60 && alder < 100) {
+                            kontingent = 1200;
+                            team = "senior";
+                        } else {
+                            System.out.println("Ugyldig alder. Prøv igen.");
+                        }
+                        crawlArray.get(IDinput).setHold(team);
+                        crawlArray.get(IDinput).setKontingent(kontingent);
                         crawlArray.get(IDinput).setAlder(alder);
                         break;
                     case 4:
@@ -578,6 +598,107 @@ import java.*;
 
         }
 
+        public static void MenuRediger(ArrayList<Medlem> crawlArray) {
+            Scanner console = new Scanner(System.in);
+            System.out.println("Skriv ID");
+            boolean exit = true;
+            int IDinput = 0;
+            do {
+                IntPrint(console);
+                IDinput = console.nextInt()- 1;
+                if (IDinput > crawlArray.size() || IDinput < 0) {
+                    System.out.println("Fejl. Indsæt ID for medlem:");
+                }
+            } while (IDinput > crawlArray.size() || IDinput < 0);
+            System.out.println(crawlArray.get(IDinput));
+            String besked = "Hvad vil du ændre?\n\n1 for fornavn.\n2 for efternavn.\n3 for alder.\n4 for køn.\n5 for email.\n6 for vejnavn.\n7 for husnummer.\n8 for postnummer.\n9 for medlemstype.\n10 for disciplin.\n11 for hold.\n0 for at gå tilbage til menu.";
+            System.out.println(besked);
+            crawlArray.get(IDinput);
+            IntPrint(console);
+            int menuitem;
+            do {
+                menuitem = console.nextInt();
+                switch (menuitem) {
+                    case 1:
+                        System.out.println("Skriv nyt fornavn.");
+                        String fornavn = console.next();
+                        crawlArray.get(IDinput).setFornavn(fornavn);
+                        break;
+                    case 2:
+                        System.out.println("Skriv nyt efternavn.");
+                        String efternavn = console.next();
+                        crawlArray.get(IDinput).setEfternavn(efternavn);
+                        break;
+                    case 3:
+                        System.out.println("Skriv ny Alder.");
+                        IntPrint(console);
+                        int alder = console.nextInt();
+                        crawlArray.get(IDinput).setAlder(alder);
+                        break;
+                    case 4:
+                        System.out.println("Skriv nyt køn.");
+                        String køn = console.next();
+                        crawlArray.get(IDinput).setKøn(køn);
+                        break;
+                    case 5:
+                        System.out.println("Skriv ny email.");
+                        String email = console.next();
+                        crawlArray.get(IDinput).setEmail(email);
+                        break;
+                    case 6:
+                        System.out.println("Skriv ny adresse.");
+                        String adresse = console.next();
+                        crawlArray.get(IDinput).setAdresse(adresse);
+                        break;
+                    case 7:
+                        System.out.println("Skriv nyt husnummer.");
+                        IntPrint(console);
+                        int husnr = console.nextInt();
+                        crawlArray.get(IDinput).setHusnr(husnr);
+                        break;
+                    case 8:
+                        System.out.println("Skriv nyt postnummer.");
+                        IntPrint(console);
+                        int postnummer = console.nextInt();
+                        crawlArray.get(IDinput).setPostnummer(postnummer);
+                        break;
+                    case 9:
+                        System.out.println("Skriv ny medlemstype");
+                        String s = "";
+                        boolean fejl = true;
+                        do {
+                            s = console.next();
+                            if (s.equals("aktiv") || (s.equals("Aktiv"))) {
+                                fejl = false;
+                            } else if (s.equals("passiv") || (s.equals("Passiv"))) {
+                                int kontingent = 500;
+                                crawlArray.get(IDinput).setKontingent(kontingent);
+                                fejl = false;
+                            } else {
+                                System.out.println("Indtast aktiv eller passiv.");
+                            }
+                        }
+                        while (fejl == true);
+                        crawlArray.get(IDinput).setMedlemstype(s);
+                        System.out.println("Medlemstype er blevet ændret");
+                        break;
+                    case 0:
+                        exit = false;
+                        break;
+                    default:
+                        System.out.println("Input kan ikke læses");
+                        break;
+                }
+                if (exit != false) {
+                    System.out.println(besked);
+                }
+
+            } while (exit);
+        }
+
+
+
+
         public static void check(ArrayList<Konkurrencesvømmer> crawlArray, int IDinput) {
             Scanner console = new Scanner(System.in);
             System.out.println("Skriv ny medlemstype");
@@ -598,5 +719,17 @@ import java.*;
             while (fejl == true);
             crawlArray.get(IDinput).setMedlemstype(s);
             System.out.println("Medlemstype er blevet ændret");
+        }
+
+        public static void PrintInfo(ArrayList<Konkurrencesvømmer> crawlArray){
+            System.out.print("\n"+"Liste over alle " + crawlArray.get(0).getDisciplin()+ " svømmere");
+            String f = crawlArray.toString().replace("[", "").replace("]", "");
+            System.out.println(f);
+        }
+
+        public static void PrintInfoMedlem(ArrayList<Medlem> crawlArray){
+            System.out.print("\n"+"Liste over alle motionist medlemmer");
+            String f = crawlArray.toString().replace("[", "").replace("]", "");
+            System.out.println(f);
         }
     }

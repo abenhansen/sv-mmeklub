@@ -140,18 +140,16 @@ public class Medlem {
 
     @Override
     public String toString() {
-        return "Medlem{" +
-                "medlemsID=" + medlemsID +
-                ", fornavn='" + fornavn + '\'' +
-                ", efternavn='" + efternavn + '\'' +
-                ", alder=" + alder +
-                ", køn='" + køn + '\'' +
-                ", email='" + email + '\'' +
-                ", adresse='" + adresse + '\'' +
-                ", medlemstype='" + medlemstype + '\'' +
-                ", husnr=" + husnr +
-                ", postnummer=" + postnummer +
-                '}';
+        return  "\n" +
+                " MedlemsID = " + medlemsID +
+                ", Navn = " + fornavn + " " + efternavn +
+                ", Alder = " + alder +
+                ", Køn = " + køn +
+                ", Email = " + email +
+                ", Adresse = " + adresse +" " + husnr +", " + postnummer +
+                ", Medlemstype = " + medlemstype +
+                ", Kontingent = " + kontingent +
+                ", Betalt = " + betalt;
     }
 
     public static int CountLine(String filename)throws Exception{

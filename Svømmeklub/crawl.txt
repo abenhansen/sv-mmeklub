@@ -1,5 +1,4 @@
-99,990000 2 2 2 2 2 2 aktiv 2 2 2 Crawl 1000 nej junior
-99,990000 3 VIncent Sucks 1 AttackHelicopter 1 aktiv 1 1 1 Crawl 500 nej junior
-99,990000 4 1 1 1 1 1 aktiv 1 1 1 Crawl 1000 nej junior
-99,990000 5 Mike Mike 1 1 1 aktiv 1 1 1 Crawl 1000 nej junior
-99,990000 6 Alfred SucksAlot 1 1 1 passiv 1 1 1 Crawl 500 nej junior
+5,000000 1 ken han 11 1 1 aktiv 1 1 1 Crawl 1000 nej junior
+99,990000 2 Ken Hansen 1 1 1 aktiv 1 1 1 Crawl 1000 nej junior
+99,990000 3 Vincent SucksAlot 21 1 1 aktiv 1 2121 4100 Crawl 1600 nej senior
+99,990000 4 Poul Poulsen 1 1 11 passiv 1 1 1 Crawl 500 nej junior
