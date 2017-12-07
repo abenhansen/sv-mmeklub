@@ -305,9 +305,18 @@ import java.*;
             System.out.println("Skriv efternavn på medlem:");
             String efternavn = input.next();
             System.out.println("Intast alder: ");
+            int kontingent = 0;
             IntPrint(input);
             int alder = input.nextInt();
-            int kontingent = 0;
+            if (alder >= 0 && alder < 18) { //alder/input
+                kontingent = 1000;
+            } else if (alder >= 18 && alder < 60) {
+                kontingent = 1600;
+            } else if (alder >= 60 && alder < 100) {
+                kontingent = 1200;
+            } else {
+                System.out.println("Ugyldig alder. Prøv igen.");
+            }
             System.out.println("Intast dit køn: ");
             String køn = input.next();
             System.out.println("Intast email: ");
@@ -713,6 +722,7 @@ import java.*;
                     System.out.println("Inmput kan ikke læses.");
                     mismatch = true;
                 }
+                IntPrint(console);
                 switch (menuitem = console.nextInt()) {
                     case 1:
                         //System.out.println("Indtast admin password");
@@ -772,6 +782,7 @@ import java.*;
                     System.out.println("Input kan ikke læses");
                     mismatch = false;
                 }
+                IntPrint(console);
                 switch (menuitem = console.nextInt()) {
                     case 1:
                         funktion = "Opret Medlem";
@@ -812,6 +823,7 @@ import java.*;
                     System.out.println("Input kan ikke læses.");
                     mismatch = true;
                 }
+                IntPrint(console);
                 switch (menuitem=console.nextInt()) {
                     case 1:
                         MenuRedigerKonkurrence(console, funktion, crawlArray, rygArray,hundeArray, brystArray, butterflyArray);
@@ -881,6 +893,7 @@ import java.*;
                     System.out.println("Input kan ikke læses.");
                     mismatch = true;
                 }
+                IntPrint(console);
                 switch(menuitem=console.nextInt()){
                     case 1:
                         disciplin = "Crawl";
@@ -947,6 +960,7 @@ import java.*;
                     System.out.println("input kan ikke læses.");
                     mismatch = true;
                 }
+                IntPrint(console);
                 switch(menuitem=console.nextInt()) {
                     case 1:
                         //rediger betaling
@@ -983,6 +997,7 @@ import java.*;
                 else if(mismatch=false){
                     System.out.println("input kan ikke læses.");
                 }
+                IntPrint(console);
                 switch (menuitem=console.nextInt()) {
                     case 1:
                         //Se toplister
