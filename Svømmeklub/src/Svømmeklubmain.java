@@ -5,7 +5,6 @@ import java.*;
 
     public class Svømmeklubmain {
         public static void main(String[] args) throws Exception {
-            Scanner input = new Scanner(System.in);
             ArrayList<Medlem> medlemArray = new ArrayList<Medlem>();
             ArrayList<Konkurrencesvømmer> crawlArray = new ArrayList<Konkurrencesvømmer>();
             ArrayList<Konkurrencesvømmer> rygArray = new ArrayList<Konkurrencesvømmer>();
@@ -13,50 +12,7 @@ import java.*;
             ArrayList<Konkurrencesvømmer> butterflyArray = new ArrayList<Konkurrencesvømmer>();
             ArrayList<Konkurrencesvømmer> brystArray = new ArrayList<Konkurrencesvømmer>();
             LoadArrays(crawlArray, medlemArray, rygArray, hundeArray, brystArray, butterflyArray);
-            //tjekBetaling(crawlArray, medlemArray,rygArray,hundeArray, brystArray, butterflyArray);
-            //ændreBetaling(medlemArray, input);
-            //ændreBetalingKon(crawlArray, input);
-            //ændreBetalingKon(rygArray, input);
-            //ændreBetalingKon(hundeArray, input);
-            //ændreBetalingKon(butterflyArray, input);
-            //ændreBetalingKon(brystArray, input);
-            //registrereTid(crawlArray);
-            //registrereTid(rygArray);
-            //registrereTid(hundeArray);
-            //registrereTid(butterflyArray);
-            //registrereTid(brystArray);
-
-            // fixArrays(crawlArray);
-            //fixArrays(rygArray);
-            //fixArrays(hundeArray);
-            // fixArrays(brystArray);
-            //fixArrays(butterflyArray);
-            //MenuRediger(medlemArray);
-            //MenuKonkurrenceRediger(crawlArray);
-            //MenuKonkurrenceRediger(rygArray);
-            //MenuKonkurrenceRediger(brystArray);
-            //MenuKonkurrenceRediger(hundeArray);
-            //MenuKonkurrenceRediger(butterflyArray);
-            //PrintInfo(crawlArray);
-            //PrintInfo(rygArray);
-            //PrintInfo(hundeArray);
-            //PrintInfo(brystArray);
-            //PrintInfo(butterflyArray);
-            //PrintInfoMedlem(medlemArray);
-            //System.out.println(rygArray);
-            //FjernKonkurrenceMedlem(crawlArray);
-            //FjernKonkurrenceMedlem(rygArray);
-            //FjernKonkurrenceMedlem(hundeArray);
-            //FjernKonkurrenceMedlem(brystArray);
-            //FjernKonkurrenceMedlem(butterflyArray);
-            //FjernMedlem(medlemArray);
-
-            //OpretMedlem(medlemArray, input);
-            //OpretKonkurrence(rygArray, input, "RygCrawl");
-            //OpretKonkurrence(crawlArray, input, "Crawl");
-            //OpretKonkurrence(hundeArray, input, "Hundesvømning");
-            //OpretKonkurrence(brystArray, input, "Brystsvømning");
-            //OpretKonkurrence(butterflyArray, input, "Butterfly");
+            MenuMain(medlemArray,crawlArray, rygArray, hundeArray, brystArray, butterflyArray);
             GemArrays(crawlArray, medlemArray, rygArray, hundeArray, brystArray, butterflyArray);
 
         }
@@ -88,11 +44,18 @@ import java.*;
             ArrayList<Konkurrencesvømmer> temp = (ArrayList<Konkurrencesvømmer>) crawlArray.clone();
             Collections.sort(temp);
             System.out.println("Top 5 bedste svømmere inde for crawl");
+            if (crawlArray.size()<5){
+                for(int j=0; j<temp.size(); j++)
+                    System.out.println("ID = " + temp.get(j).getMedlemsID() + " Navn = " + temp.get(j).getFornavn() +
+                            " " + temp.get(j).getEfternavn() + ", Diciplin = " + temp.get(j).getDisciplin() + ", Tid = " +
+                            temp.get(j).getTid());
+            }
+            else{
             for (int i = 0; i < 5; i++)
                 System.out.println("ID = " + temp.get(i).getMedlemsID() + " Navn = " + temp.get(i).getFornavn() +
                         " " + temp.get(i).getEfternavn() + ", Diciplin = " + temp.get(i).getDisciplin() + ", Tid = " +
                         temp.get(i).getTid());
-        }
+        }}
 
         public static void ændreBetaling(ArrayList<Medlem> medlemArray, Scanner input) {
             System.out.println("Tast 1 for at registrere medlemmets betaling af kontingent.");
@@ -731,5 +694,316 @@ import java.*;
             System.out.print("\n"+"Liste over alle motionist medlemmer");
             String f = crawlArray.toString().replace("[", "").replace("]", "");
             System.out.println(f);
+        }
+
+        public static void MenuMain(ArrayList<Medlem> medlemArray, ArrayList<Konkurrencesvømmer> crawlArray,
+                                    ArrayList<Konkurrencesvømmer> rygArray, ArrayList<Konkurrencesvømmer> hundeArray,
+                                    ArrayList<Konkurrencesvømmer> brystArray, ArrayList<Konkurrencesvømmer> butterflyArray)throws Exception {
+            Scanner console = new Scanner(System.in);
+            boolean mismatch = true;
+            String password;
+            int menuitem;
+            System.out.println("___________________________________________________\n\n      Svømmeklubben delfinens managementsystem      \n     __________________________________________     \n\n\n");
+
+            do{
+                if(mismatch=!false){
+                    System.out.println("Vælg menu:\n\n1 for managermenu.(Nyt medlem/ændr medlem/slet medlem)\n2 for kassermenu.(se restanceliste/ændr betaling)\n3 for trænermenu.(Se topliste/se medlemstid/rediger medlemstid/se turneringsresultat/rediger turneringsresultat)\n9 for at se medlemsliste.\n 0 for at afslutte programmet.");
+                }
+                else if(mismatch=!true){
+                    System.out.println("Inmput kan ikke læses.");
+                    mismatch = true;
+                }
+                switch (menuitem = console.nextInt()) {
+                    case 1:
+                        //System.out.println("Indtast admin password");
+                        //password = console.next();
+                        //if(password.equalsIgnoreCase("admin")){
+                            MenuManager(console, crawlArray, medlemArray, rygArray, hundeArray, brystArray, butterflyArray);
+                       /* }else{
+                            System.out.println("Password ikke godkendt. vælg menu igen.");
+                            mismatch = true;*/
+                        //}
+                        break;
+                    case 2:
+                        System.out.println("Indtast kasser password");
+                       // password = console.next();
+                       // if(password.equalsIgnoreCase("kasser")){
+                            MenuKasser(console,crawlArray,medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        /*}else{
+                            System.out.println("Password ikke godkendt. vælg menu igen.");
+                            mismatch = true;
+                        }*/
+                        break;
+                    case 3:
+                        System.out.println("Indtast træner password");
+
+                        //password = console.next();
+                        //if(password.equalsIgnoreCase("træner")){
+                            MenuTræner(console,crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        //}else{
+                          //  System.out.println("Password ikke godkendt. vælg menu igen.");
+                           // mismatch = true;
+                        //}
+                        break;
+
+                    case 0:
+                        System.out.println("Hav en god dag!");
+                        break;
+                    default:
+                        mismatch = false;
+                        break;
+                }
+            }while(menuitem!=0);
+        }
+
+
+
+        public static void MenuManager(Scanner console, ArrayList<Konkurrencesvømmer> crawlArray,ArrayList<Medlem> medlemArray,
+                                       ArrayList<Konkurrencesvømmer> rygArray, ArrayList<Konkurrencesvømmer> hundeArray,
+                                       ArrayList<Konkurrencesvømmer> brystArray, ArrayList<Konkurrencesvømmer> butterflyArray)throws Exception{
+            boolean mismatch = false;
+            String funktion;
+            int menuitem;
+            do {
+                if(mismatch == false){
+                    System.out.println("Managermenu:\n\n1 for at oprette et nyt medlem.\n2 for at redigere et eksisterende medlem.\n3 for at fjerne et medlem.\n9 for at se medlemsliste.\n0 for at gå tilbage til hovedmenuen.");
+                }
+                else if(mismatch == true){
+                    System.out.println("Input kan ikke læses");
+                    mismatch = false;
+                }
+                switch (menuitem = console.nextInt()) {
+                    case 1:
+                        funktion = "Opret Medlem";
+                        MenuRedigerMedlem(console, funktion, crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 2:
+                        funktion = "Rediger Medlem";
+                        MenuRedigerMedlem(console, funktion, crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 3:
+                        funktion = "Fjern Medlem";
+                        MenuRedigerMedlem(console, funktion, crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 9:
+                        funktion = "Se medlemsliste";
+                        MenuRedigerMedlem(console, funktion, crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        mismatch = true;
+                        break;
+                }
+            }while(menuitem!=0);
+        }
+
+
+        public static void MenuRedigerMedlem(Scanner console, String funktion, ArrayList<Konkurrencesvømmer> crawlArray,ArrayList<Medlem> medlemArray,
+                                             ArrayList<Konkurrencesvømmer> rygArray, ArrayList<Konkurrencesvømmer> hundeArray,
+                                             ArrayList<Konkurrencesvømmer> brystArray, ArrayList<Konkurrencesvømmer> butterflyArray)throws Exception{
+            boolean mismatch = true;
+            boolean igen = true;
+           int menuitem;
+            do{
+                if(mismatch=true){
+                    System.out.println(funktion+":\nVælg konkurrencesvømmer/motionssvømmer:\n\n1 for konkurrencesvømmer.\n2 for motionssvømmer\n0 for at gå tilbage til menuen");
+                }else if(mismatch=false){
+                    System.out.println("Input kan ikke læses.");
+                    mismatch = true;
+                }
+                switch (menuitem=console.nextInt()) {
+                    case 1:
+                        MenuRedigerKonkurrence(console, funktion, crawlArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        igen = MenuRedigerIgen(console,funktion);
+                        break;
+                    case 2:
+                        if(funktion=="Opret Medlem") {
+                            OpretMedlem(medlemArray, console);
+                            do {
+                                menuitem = console.nextInt();
+                            }while(menuitem!=0 && menuitem!=1);
+                        }else if(funktion=="Rediger Medlem"){
+                            MenuRediger(medlemArray);
+                            do {
+                                menuitem = console.nextInt();
+                            }while(menuitem!=0 && menuitem!=1);
+                        }else if(funktion=="Fjern Medlem"){
+                            FjernMedlem(medlemArray);
+                        }else if(funktion=="Rediger betaling for medlem"){
+                            ændreBetaling(medlemArray, console);
+                        }else if(funktion=="Se medlemsliste"){
+                            PrintInfoMedlem(medlemArray);
+                        }
+                        igen = MenuRedigerIgen(console,funktion);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        mismatch = true;
+                        break;
+                }
+            } while(menuitem !=0 && igen==true);
+        }
+
+        public static boolean MenuRedigerIgen(Scanner console, String funktion) throws Exception{
+            Scanner in = new Scanner (System.in);
+            String besked = "1 for at forsætte og 0 for at afslutte";
+            int inp;
+            if(funktion=="Opret Medlem"){
+                System.out.println("Medlem Oprettet. Opret et medlem til?");
+            }else if(funktion=="Rediger Medlem"){
+                System.out.println("Medlem redigeret. Rediger et medlem til?");
+            }else if(funktion=="Fjern Medlem"){
+                System.out.println("Medlem fjernet. Fjern et medlem til?");
+            }else if(funktion=="Rediger betaling for medlem") {
+            } System.out.println(besked);
+            do{
+                inp = in.nextInt();
+            }while(inp!=1&&inp!=0);
+            if(inp==1){
+                return true;
+            }else
+                return false;
+        }
+
+        public static void MenuRedigerKonkurrence(Scanner console, String funktion, ArrayList<Konkurrencesvømmer> crawlArray,
+                                                  ArrayList<Konkurrencesvømmer> rygArray, ArrayList<Konkurrencesvømmer> hundeArray,
+                                                  ArrayList<Konkurrencesvømmer> brystArray, ArrayList<Konkurrencesvømmer> butterflyArray)throws Exception{
+            boolean mismatch = true;
+            String disciplin;
+            int menuitem;
+            do {
+                if(mismatch=true){
+                    System.out.println("Vælg disciplin:\n1 for crawl.\n2 for rygcrawl.\n3 for brystsvømning\n4 for butterfly.\n5 for hundesvømning.\n0 for at gå tilbage til menu.");
+                }
+                else if(mismatch=false){
+                    System.out.println("Input kan ikke læses.");
+                    mismatch = true;
+                }
+                switch(menuitem=console.nextInt()){
+                    case 1:
+                        disciplin = "Crawl";
+                        MenuKonkurrenceFunktion(crawlArray, disciplin, funktion, console);
+                        break;
+                    case 2:
+                        disciplin = "RygCrawl";
+                        MenuKonkurrenceFunktion(rygArray, disciplin, funktion, console);
+                        break;
+                    case 3:
+                        disciplin = "Brystsvømning";
+                        MenuKonkurrenceFunktion(brystArray, disciplin, funktion, console);
+                        break;
+                    case 4:
+                        disciplin = "Butterfly";
+                        MenuKonkurrenceFunktion(butterflyArray, disciplin, funktion, console);
+                        break;
+                    case 5:
+                        disciplin = "Hundesvømning";
+                        MenuKonkurrenceFunktion(hundeArray, disciplin, funktion, console);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        mismatch = false;
+                        break;
+                }
+                if(menuitem<=5 && menuitem>=1) {
+                    menuitem = 0;
+                }
+            }while(menuitem!=0);
+        }
+
+        public static void MenuKonkurrenceFunktion(ArrayList<Konkurrencesvømmer> konkurrenceArray, String disciplin, String funktion,Scanner console) throws Exception{
+            if(funktion=="Opret Medlem"){
+                OpretKonkurrence(konkurrenceArray, console, disciplin);
+            }else if(funktion=="Rediger Medlem"){
+                MenuKonkurrenceRediger(konkurrenceArray);
+            }else if(funktion=="Fjern Medlem"){
+                FjernKonkurrenceMedlem(konkurrenceArray);
+            }else if(funktion=="Rediger betaling for medlem"){
+                ændreBetalingKon(konkurrenceArray, console);
+            }else if(funktion=="Se toplister"){
+                fixArrays(konkurrenceArray);
+            }else if(funktion=="Registrer tid"){
+                registrereTid(konkurrenceArray);
+            }else if(funktion=="Se medlemsliste"){
+                PrintInfo(konkurrenceArray);
+            }
+        }
+
+
+        public static void MenuKasser(Scanner console, ArrayList<Konkurrencesvømmer> crawlArray, ArrayList<Medlem> medlemArray,
+                                      ArrayList<Konkurrencesvømmer> rygArray, ArrayList<Konkurrencesvømmer> hundeArray,
+                                      ArrayList<Konkurrencesvømmer> brystArray, ArrayList<Konkurrencesvømmer> butterflyArray)throws Exception{
+            boolean mismatch = true;
+            String funktion;
+            int menuitem;
+            do{
+                if(mismatch=true){
+                    System.out.println("Kassérmenu:\n\n1 for at ændre betaling for et medlem.\n2 for at se restanceliste.\n9 for at se medlemsliste.\n0 for at gå tilbage til hovedmenu.");
+                }
+                else if(mismatch=false){
+                    System.out.println("input kan ikke læses.");
+                    mismatch = true;
+                }
+                switch(menuitem=console.nextInt()) {
+                    case 1:
+                        //rediger betaling
+                        funktion = "Rediger betaling for medlem";
+                        MenuRedigerMedlem(console, funktion, crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 2:
+                        //se restanceliste
+                        tjekBetaling(crawlArray, medlemArray,rygArray,hundeArray, brystArray, butterflyArray);                    break;
+                    //
+                    case 9:
+                        //se medlemsliste
+                        funktion = "Se medlemsliste";
+                        MenuRedigerMedlem(console, funktion, crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        mismatch = false;
+                        break;
+                }
+            }while(menuitem!=0);
+        }
+        public static void MenuTræner(Scanner console, ArrayList<Konkurrencesvømmer> crawlArray, ArrayList<Medlem> medlemArray,
+                                      ArrayList<Konkurrencesvømmer> rygArray, ArrayList<Konkurrencesvømmer> hundeArray,
+                                      ArrayList<Konkurrencesvømmer> brystArray, ArrayList<Konkurrencesvømmer> butterflyArray)throws Exception{
+            String funktion;
+            boolean mismatch = true;
+            int menuitem;
+            do {
+                if(mismatch=true){
+                    System.out.println("Trænermenu:\n\n1 for at se toplister.\n2 for at registrere medlemstid\n\n9 for at se medlemsliste.\n0 for at gå tilbage til hovedmenuu.");
+                }
+                else if(mismatch=false){
+                    System.out.println("input kan ikke læses.");
+                }
+                switch (menuitem=console.nextInt()) {
+                    case 1:
+                        //Se toplister
+                        funktion = "Se toplister";
+                        MenuRedigerKonkurrence(console, funktion,crawlArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 2:
+                        //Registrer tid
+                        funktion = "Registrer tid";
+                        MenuRedigerKonkurrence(console, funktion, crawlArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 9:
+                        funktion = "Se medlemsliste";
+                        MenuRedigerMedlem(console, funktion, crawlArray, medlemArray, rygArray,hundeArray, brystArray, butterflyArray);
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        mismatch = false;
+                        break;
+                }
+            }while(menuitem!=0) ;
         }
     }
