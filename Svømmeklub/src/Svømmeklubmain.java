@@ -1,7 +1,6 @@
-import java.io.*;
-import java.lang.reflect.Array;
+
 import java.util.*;
-import java.*;
+
 
     public class Svømmeklubmain {
         public static void main(String[] args) throws Exception {
@@ -191,7 +190,6 @@ import java.*;
             Scanner input = new Scanner(System.in);
             Scanner input2 = new Scanner(System.in);
             System.out.println("Indsæt ID for medlem der skal fjernes:");
-            int count4 = 0;
             int count3 = 0;
             int count2 = 0;
             int count = 0;
@@ -220,7 +218,6 @@ import java.*;
                                 count3++;
                                 break;
                             case "N":
-                                count4++;
                                 count3++;
                                 count2++;
                                 count++;
@@ -244,7 +241,6 @@ import java.*;
             Scanner input = new Scanner(System.in);
             Scanner input2 = new Scanner(System.in);
             System.out.println("Indsæt ID for medlem der skal fjernes:");
-            int count4 = 0;
             int count3 = 0;
             int count2 = 0;
             int count = 0;
@@ -273,7 +269,6 @@ import java.*;
                                 count3++;
                                 break;
                             case "N":
-                                count4++;
                                 count3++;
                                 count2++;
                                 count++;
